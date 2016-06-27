@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+
+	<style type="text/css">
+	body, html {
+		margin: 0;
+		padding: 0;
+	}
+		.map {
+			height: 750px;
+			width: 750px;
+			position: relative;
+		}
+
+		.map-img {
+			width: 100%;
+		}
+
+		.marker {
+			background: url('map-marker-icon.png');
+			background-size: 50px;
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			cursor: pointer;
+		}
+
+		.marker-1 {
+			top: 450px;
+			left: 50px;
+		}
+
+		.marker-2 {
+			top: 300px;
+			left: 600px;
+		}
+
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+
+<div class="map">
+	<img class="map-img" src="rq-map.jpg" alt="">
+	<div class="marker marker-1">
+		<div class="text hide">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quam ipsa aliquam, adipisci quibusdam ad quidem deleniti possimus distinctio nam repellat harum, beatae quaerat impedit molestias sed suscipit facere delectus.</div>
+	</div>
+	<div class="marker marker-2">
+		<div class="text hide">More text</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+$('.marker').hover(function(){
+	$(this).find('.text').toggleClass('hide');
+}, function(){
+	$(this).find('.text').toggleClass('hide');
+});
+
+// $('.marker').on('click hover', function(){
+// 	$(this).find('.text').toggleClass('hide');
+// });
+
+</script>
+</body>
+</html>
