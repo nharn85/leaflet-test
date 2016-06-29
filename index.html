@@ -11,13 +11,14 @@
 		padding: 0;
 	}
 		.map {
-			height: 750px;
-			width: 750px;
+			height: 500px;
+			width: 500px;
 			position: relative;
+			overflow: hidden;
 		}
 
 		.map-img {
-			width: 100%;
+			/*width: 100%;*/
 		}
 
 		.marker {
@@ -42,13 +43,19 @@
 		.hide {
 			display: none;
 		}
+		#range {
+		    width:400px;
+		    height:400px;
+		    overflow:hidden;
+		    border:1px solid black;
+		}
 	</style>
 </head>
 
 <body>
 
-<div class="map">
-	<img class="map-img" src="rq-map.jpg" alt="">
+<div id="range">
+	<img id="map" class="map" src="rq-map.jpg" alt="">
 	<div class="marker marker-1">
 		<div class="text hide">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quam ipsa aliquam, adipisci quibusdam ad quidem deleniti possimus distinctio nam repellat harum, beatae quaerat impedit molestias sed suscipit facere delectus.</div>
 	</div>
@@ -58,6 +65,7 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
 $('.marker').hover(function(){
 	$(this).find('.text').toggleClass('hide');
@@ -68,7 +76,9 @@ $('.marker').hover(function(){
 // $('.marker').on('click hover', function(){
 // 	$(this).find('.text').toggleClass('hide');
 // });
-
+jQuery(document).ready(function() {
+    jQuery("#map").draggable();
+});
 </script>
 </body>
 </html>
