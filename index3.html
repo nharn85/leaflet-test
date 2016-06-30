@@ -15,6 +15,9 @@
 		#openseadragon1 .highlight {
 			outline: 3px solid yellow;
 		}
+		.overlay {
+			position: relative;
+		}
 		#example-tip {
 			display: none;
 			    position: absolute;
@@ -24,12 +27,32 @@
 				left: 46%;
 				top: 42%;
 		}
+		#toolbarDiv {
+			z-index: 1;
+		}
 	</style>
 </head>
 <body>
-<div id="example-tip">jkhskjh</div>
+<div id="toolbarDiv" class="toolbar">
+        <span style='float:right;margin:10px 20px 0 0'>
+            | <a id="zoom-in" href="#zoom-in">Zoom In</a>
+            | <a id="zoom-out" href="#zoom-out">Zoom Out</a>
+            | <a id="home" href="#home">Home</a>
+            | <a id="full-page" href="#full-page">Full Page</a>
+        </span>
+        <span style='float:left;margin:10px 0 0 20px'>
+        &lt;&nbsp;
+            <a id="previous" href="#previous-page">Previous</a>
+            | <a id="next" href="#next-page">Next</a>
+            &nbsp;&gt;
+            <span id='currentpage'> 1 of 2 </span>
+        </span>
+    </div>
 <div id="openseadragon1">
-	<div id="example-overlay" class="highlight">Test</div>
+	<div class="overlay">
+		<div id="example-overlay" class="highlight">Test</div>
+		<div id="example-tip">jkhskjh</div>
+	</div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="openseadragon.min.js"></script>
@@ -37,6 +60,15 @@
     var viewer = OpenSeadragon({
         id: "openseadragon1",
         prefixUrl: "images/",
+        toolbar:        "toolbarDiv",
+        zoomInButton:   "zoom-in",
+        zoomOutButton:  "zoom-out",
+        homeButton:     "home",
+        fullPageButton: "full-page",
+        nextButton:     "next",
+        previousButton: "previous",
+        // showNavigator:  true,
+        sequenceMode: true,
         tileSources: [{
                 type: 'image',
                 url:  'rq-map.jpg',
@@ -46,7 +78,17 @@
 			        y: 0.5,
 			        placement: 'bottom',
 			        // checkResize: true
-		        }],
+		        }]
+            }, {
+                type: 'image',
+                url:  'rq-map.jpg',
+                overlays: [{
+		            id: 'example-overlay',
+		            x: 0.5,
+			        y: 0.5,
+			        placement: 'bottom',
+			        // checkResize: true
+		        }]
             }],
 	    defaultZoomLevel: 	1,
 	    minZoomLevel: 	1,
@@ -59,6 +101,9 @@
     viewer.addHandler("open", function(){
     jQuery("#example-overlay").click(function(e){
         jQuery("#example-tip").show();
+    });
+    viewer.addHandler("page", function (data) {
+        document.getElementById("currentpage").innerHTML = ( data.page + 1 ) + " of 2";
     });
 });
 </script>
