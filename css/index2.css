@@ -1,0 +1,19 @@
+.openseadragon {
+	/*bottom: 0;
+	height: 80vh;
+	position: absolute;
+	width: 100vw;*/
+}
+
+#example-tip {
+	padding: 10px;
+	display: none;
+	width: 200px;
+	background: white;
+	z-index: 100;
+}
+
+.highlight {
+	outline: 3px solid blue;
+	cursor: pointer;
+}

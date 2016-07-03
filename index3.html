@@ -8,16 +8,19 @@
 		#openseadragon1 {
 			position: absolute;
 			  left: 0;
-			  top: 0;
+			  bottom: 0;
 			  width: 100%;
 			  height: 75%;
 			  background-color: black;
 		}
 		#openseadragon1 .highlight {
 			outline: 3px solid yellow;
+			cursor: pointer;
+			padding: 10px;
 		}
 		.overlay {
 			position: relative;
+			cursor: pointer;
 		}
 		#example-tip {
 			display: none;
@@ -57,56 +60,7 @@
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="openseadragon.min.js"></script>
-<script type="text/javascript">
-    var viewer = OpenSeadragon({
-        id: "openseadragon1",
-        prefixUrl: "images/",
-        toolbar:        "toolbarDiv",
-        zoomInButton:   "zoom-in",
-        zoomOutButton:  "zoom-out",
-        homeButton:     "home",
-        fullPageButton: "full-page",
-        nextButton:     "next",
-        previousButton: "previous",
-        // showNavigator:  true,
-        sequenceMode: true,
-        tileSources: [{
-                type: 'image',
-                url:  'rq-map.jpg',
-                overlays: [{
-		            id: 'example-overlay',
-		            x: 0.5,
-			        y: 0.5,
-			        placement: 'bottom',
-			        // checkResize: true
-		        }]
-            }, {
-                type: 'image',
-                url:  'rq-map.jpg',
-                overlays: [{
-		            id: 'example-overlay',
-		            x: 0.5,
-			        y: 0.5,
-			        placement: 'bottom',
-			        // checkResize: true
-		        }]
-            }],
-	    defaultZoomLevel: 	1,
-	    minZoomLevel: 	1,
-	    maxZoomLevel: 	3,
-	    // zoomInButton:   "zoom-in",
-	    // zoomOutButton:  "zoom-out",
-	    // homeButton:     "home",
-
-    });
-    viewer.addHandler("open", function(){
-    jQuery("#example-overlay").click(function(e){
-        jQuery("#example-tip").show();
-    });
-    viewer.addHandler("page", function (data) {
-        document.getElementById("currentpage").innerHTML = ( data.page + 1 ) + " of 2";
-    });
-});
-</script>
+<script src="viewerinputhook.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>

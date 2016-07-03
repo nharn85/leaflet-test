@@ -2,15 +2,66 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Document</title>
-	<style type="text/css">
-		iframe {
-		width: 500px;
-		height: 500px;
-	}
-	</style>
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="/css/index2.css">
 </head>
 <body>
-	<iframe src="index.html"></iframe>
+	<div id="openseadragon" class="openseadragon">
+
+		<div id="example-overlay" class="highlight">test</div>
+		<div id="example-tip">The overlay can provide a class name and ID to bind additional events to.</div>
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="openseadragon.min.js"></script>
+	<script type="text/javascript">
+		OpenSeadragon({
+			id:            "openseadragon",
+			prefixUrl:     "/images/",
+			tileSources: [ 'rq-map.dzi' ],
+			overlays: [{
+          id: 'example-overlay',
+          x: 0.53,
+          y: 0.55,
+          className: 'highlight'
+      }],
+			defaultZoomLevel: 2,
+			minZoomLevel: 1,
+			// applyConstraints: true,
+			// visibilityRatio: 1,
+			// debug: true,
+		});
+
+		jQuery(function() {
+        //Tooltips
+        setTimeout(bindtooltip, 2000);
+      });
+		function bindtooltip(){
+			var tip = jQuery('#example-tip');
+			jQuery("#example-overlay").hover(function(e){
+	      var mousex = e.pageX + 20, //Get X coodrinates
+	          mousey = e.pageY + 20, //Get Y coordinates
+	          tipWidth = tip.width(), //Find width of tooltip
+	          tipHeight = tip.height(), //Find height of tooltip
+
+	      //Distance of element from the right edge of viewport
+	      tipVisX = $(window).width() - (mousex + tipWidth),
+	      //Distance of element from the bottom of viewport
+	      tipVisY = $(window).height() - (mousey + tipHeight);
+
+	      if ( tipVisX < 20 ) { //If tooltip exceeds the X coordinate of viewport
+	      	mousex = e.pageX - tipWidth - 20;
+	      } if ( tipVisY < 20 ) { //If tooltip exceeds the Y coordinate of viewport
+	      	mousey = e.pageY - tipHeight - 20;
+	      }
+	      tip.css({  top: mousey, left: mousex, position: 'absolute' });
+	      tip.fadeIn().css({opacity: 0.8}); //Show tooltip
+	    }, function() {
+	      tip.fadeOut(); //Hide tooltip
+	    });
+		};
+	</script>
 </body>
 </html>
